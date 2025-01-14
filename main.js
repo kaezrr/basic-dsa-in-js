@@ -1,26 +1,60 @@
-import { HashMap } from "./hashmap.js";
+import { Tree } from "./bst.js";
 
-// example uses class syntax - adjust as necessary
-const test = new HashMap();
-test.set("apple", "red");
-test.set("banana", "yellow");
-test.set("carrot", "orange");
-test.set("dog", "brown");
-test.set("elephant", "gray");
-test.set("frog", "green");
-test.set("grape", "purple");
-test.set("hat", "black");
-test.set("ice cream", "white");
-test.set("jacket", "blue");
-test.set("kite", "pink");
-test.set("lion", "golden");
-test.set("elephant", "white");
+function getInt(max, min = 0) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-test.set("crow", "black");
-test.set("kite", "red");
-test.remove("kite");
-test.remove("elephant");
-console.log(test.has("kite"));
-console.log(test.has("john"));
-console.log(test.entries());
-console.log(test.length());
+function getRandomArray(size) {
+  return new Array(size).fill(null).map((_) => getInt(100));
+}
+
+const tree = new Tree(getRandomArray(16));
+tree.print();
+console.log("Is Balanced? " + tree.isBalanced());
+console.log("--------------------------------");
+
+let inOrder = [];
+tree.inOrder((e) => inOrder.push(e.data));
+console.log("inOrder: " + inOrder.join(" "));
+
+let preOrder = [];
+tree.preOrder((e) => preOrder.push(e.data));
+console.log("preOrder: " + preOrder.join(" "));
+
+let postOrder = [];
+tree.postOrder((e) => postOrder.push(e.data));
+console.log("postOrder: " + postOrder.join(" "));
+
+let levelOrder = [];
+tree.levelOrder((e) => levelOrder.push(e.data));
+console.log("levelOrder: " + levelOrder.join(" "));
+
+tree.insert(getInt(1000, 101));
+tree.insert(getInt(1000, 101));
+tree.insert(getInt(1000, 101));
+tree.insert(getInt(1000, 101));
+tree.insert(getInt(1000, 101));
+tree.print();
+console.log("Is Balanced? " + tree.isBalanced());
+console.log("--------------------------------");
+
+tree.rebalance();
+tree.print();
+console.log("Is Balanced? " + tree.isBalanced());
+console.log("--------------------------------");
+
+inOrder = [];
+tree.inOrder((e) => inOrder.push(e.data));
+console.log("inOrder: " + inOrder.join(" "));
+
+preOrder = [];
+tree.preOrder((e) => preOrder.push(e.data));
+console.log("preOrder: " + preOrder.join(" "));
+
+postOrder = [];
+tree.postOrder((e) => postOrder.push(e.data));
+console.log("postOrder: " + postOrder.join(" "));
+
+levelOrder = [];
+tree.levelOrder((e) => levelOrder.push(e.data));
+console.log("levelOrder: " + levelOrder.join(" "));
